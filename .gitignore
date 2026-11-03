@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.eggs/
+*.whl
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# Build
+build/
+dist/
+*.spec
+*.manifest
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Project-specific
+.screenshots/
+recording.json
+*.json.tmp
+.acl-recovery/
+
+# Development-only scripts and docs (kept locally, not published)
+tools/
+DEVELOPMENT.md
+
+# Secrets
+.env
+.credentials
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/

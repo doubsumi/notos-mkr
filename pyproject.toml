@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mkr"
+version = "0.1.0"
+description = "Lightweight mouse & keyboard recorder / replayer with a capsule GUI and MCP server"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = [
+    "pynput>=1.7.6",
+    "PySide6-Essentials>=6.7",
+]
+
+[project.scripts]
+mkr = "mkr.cli:main"
+mkr-mcp = "mkr.mcp_server:main"
+
+[project.gui-scripts]
+mkr-gui = "mkr.gui:run_gui"
+
+[project.urls]
+Homepage = "https://github.com/doubsumi/mkr"
+Repository = "https://github.com/doubsumi/mkr"
+Issues = "https://github.com/doubsumi/mkr/issues"
+
+[tool.setuptools.packages.find]
+include = ["mkr*"]
