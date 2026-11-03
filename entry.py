@@ -26,7 +26,7 @@ if _plt.system() == "Windows":
         except Exception:
             pass
 
-from mkr.cli import main  # noqa: E402
+from notos_mkr.cli import main  # noqa: E402
 
 if __name__ == "__main__":
     raise SystemExit(main())

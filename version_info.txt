@@ -16,13 +16,13 @@ VSVersionInfo(
       StringTable(
         '080404B0',
         [
-          StringStruct('CompanyName', 'mkr'),
-          StringStruct('FileDescription', 'mkr - 鼠标键盘录制回放工具'),
+          StringStruct('CompanyName', 'notos-mkr'),
+          StringStruct('FileDescription', 'notos-mkr - 鼠标键盘录制回放工具'),
           StringStruct('FileVersion', '0.1.0.0'),
-          StringStruct('InternalName', 'mkr'),
-          StringStruct('LegalCopyright', ''),
-          StringStruct('OriginalFilename', 'mkr.exe'),
-          StringStruct('ProductName', 'mkr'),
+          StringStruct('InternalName', 'notos-mkr'),
+          StringStruct('LegalCopyright', 'MIT License'),
+          StringStruct('OriginalFilename', 'notos-mkr.exe'),
+          StringStruct('ProductName', 'notos-mkr'),
           StringStruct('ProductVersion', '0.1.0.0'),
         ],
       )

@@ -119,7 +119,7 @@ def main(argv=None):
     # 解释器结束前都主动释放所有修饰键，避免系统输入映射错乱
     atexit.register(_safe_release_modifiers)
 
-    p = argparse.ArgumentParser(prog="mkr", description="鼠标键盘录制回放工具")
+    p = argparse.ArgumentParser(prog="notos-mkr", description="鼠标键盘录制回放工具")
     sub = p.add_subparsers(dest="cmd")
 
     g = sub.add_parser("gui", help="毛玻璃胶囊 GUI (默认)")

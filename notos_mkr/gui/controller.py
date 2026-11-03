@@ -35,8 +35,8 @@ class GuiController(QObject):
         self.settings = QSettings(
             QSettings.Format.IniFormat,
             QSettings.Scope.UserScope,
-            "mkr",
-            "mkr",
+            "notos-mkr",
+            "notos-mkr",
         )
 
         self._state = UiState.IDLE
@@ -133,9 +133,9 @@ class GuiController(QObject):
             elif name == "status":
                 text = payload.get("text", "")
                 if text:
-                    print(f"[mkr] {text}")
+                    print(f"[notos-mkr] {text}")
         except Exception as e:
-            print(f"[mkr] gui event error ({name}): {e}")
+            print(f"[notos-mkr] gui event error ({name}): {e}")
 
     def _on_record_started(self) -> None:
         self._state = UiState.RECORDING
@@ -212,7 +212,7 @@ class GuiController(QObject):
             elif self._state == UiState.TAKEN_OVER:
                 self.app.replay(loops=self._loop_count)
         except Exception as e:
-            print(f"[mkr] click error: {e}")
+            print(f"[notos-mkr] click error: {e}")
 
     # ------------------------------------------------------------ 命中过滤
     def _snapshot_geometry(self) -> HitGeometry | None:

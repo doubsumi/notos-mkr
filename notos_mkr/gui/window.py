@@ -89,7 +89,7 @@ class CapsuleWindow(QWidget):
         self.setFixedSize(int(theme.WINDOW_W), int(theme.WINDOW_H))
         self.setMouseTracking(True)
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        self.setWindowTitle("mkr")
+        self.setWindowTitle("notos-mkr")
 
         self._state = UiState.IDLE
         self._bg_opacity = theme.DEFAULT_BG_OPACITY

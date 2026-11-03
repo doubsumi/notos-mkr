@@ -1,4 +1,4 @@
-"""mkr 的 Windows 优先 PySide6 胶囊 GUI 入口。"""
+"""notos-mkr 的 Windows 优先 PySide6 胶囊 GUI 入口。"""
 from __future__ import annotations
 
 import atexit
@@ -23,15 +23,15 @@ def _set_windows_dpi_awareness() -> None:
 
 def _app_data_dir() -> str:
     if sys.platform == "win32" and os.environ.get("LOCALAPPDATA"):
-        return os.path.join(os.environ["LOCALAPPDATA"], "mkr")
-    return os.path.join(os.path.expanduser("~"), ".mkr")
+        return os.path.join(os.environ["LOCALAPPDATA"], "notos-mkr")
+    return os.path.join(os.path.expanduser("~"), ".notos-mkr")
 
 
 def _setup_logging(app_dir: str) -> None:
     try:
         os.makedirs(app_dir, exist_ok=True)
         handler = RotatingFileHandler(
-            os.path.join(app_dir, "mkr.log"),
+            os.path.join(app_dir, "notos-mkr.log"),
             maxBytes=512 * 1024,
             backupCount=2,
             encoding="utf-8",
@@ -46,7 +46,7 @@ def _setup_logging(app_dir: str) -> None:
         pass
 
     def _hook(exc_type, exc, tb):
-        logging.getLogger("mkr").error("unhandled exception",
+        logging.getLogger("notos-mkr").error("unhandled exception",
                                        exc_info=(exc_type, exc, tb))
         sys.__excepthook__(exc_type, exc, tb)
 
@@ -56,7 +56,7 @@ def _setup_logging(app_dir: str) -> None:
 def _fatal_message(text: str) -> None:
     """启动失败时给一个原生消息框；无控制台/无 Qt 时也能看到原因。"""
     try:
-        ctypes.windll.user32.MessageBoxW(0, text, "mkr", 0x10)
+        ctypes.windll.user32.MessageBoxW(0, text, "notos-mkr", 0x10)
         return
     except Exception:
         pass
@@ -75,7 +75,7 @@ def _acquire_single_instance(app_dir: str, log: logging.Logger):
         ]
         kernel32.CreateMutexW.restype = ctypes.c_void_p
         kernel32.CloseHandle.argtypes = [ctypes.c_void_p]
-        name = "Local\\mkr-gui-" + (os.environ.get("USERNAME") or "user")
+        name = "Local\\notos-mkr-gui-" + (os.environ.get("USERNAME") or "user")
         handle = kernel32.CreateMutexW(None, False, name)
         err = ctypes.get_last_error()
         if not handle:
@@ -93,7 +93,7 @@ def _acquire_single_instance(app_dir: str, log: logging.Logger):
         from PySide6.QtCore import QLockFile
     except Exception:
         return "lock", None, None
-    lock = QLockFile(os.path.join(app_dir, "mkr.lock"))
+    lock = QLockFile(os.path.join(app_dir, "notos-mkr.lock"))
     lock.setStaleLockTime(30000)
     if not lock.tryLock(120):
         return "denied", lock, None
@@ -113,8 +113,8 @@ def run_gui() -> int:
     # 也能在日志里看到原因，而不是“双击后什么都没发生”。
     app_dir = _app_data_dir()
     _setup_logging(app_dir)
-    log = logging.getLogger("mkr.gui")
-    log.info("starting mkr gui on %s", sys.platform)
+    log = logging.getLogger("notos-mkr.gui")
+    log.info("starting notos-mkr gui on %s", sys.platform)
 
     try:
         from PySide6.QtCore import Qt
@@ -123,10 +123,10 @@ def run_gui() -> int:
     except ModuleNotFoundError as e:
         if e.name and e.name.startswith("PySide6"):
             msg = (
-                "mkr 缺少 GUI 依赖 PySide6。\n\n"
+                "notos-mkr 缺少 GUI 依赖 PySide6。\n\n"
                 "请在项目目录运行:\n"
                 "  .venv\\Scripts\\pip install PySide6-Essentials\n\n"
-                f"日志: {os.path.join(app_dir, 'mkr.log')}\n"
+                f"日志: {os.path.join(app_dir, 'notos-mkr.log')}\n"
                 "也可以直接使用 run_gui.cmd（不经过 exe，不会触发 SmartScreen）。"
             )
             log.exception("missing PySide6")
@@ -142,14 +142,14 @@ def run_gui() -> int:
     except Exception as e:
         log.exception("QApplication init failed")
         _fatal_message(
-            "mkr 启动失败：Qt 初始化失败。\n"
-            f"{e!r}\n\n日志: {os.path.join(app_dir, 'mkr.log')}\n"
-            "请使用 run_gui_debug.cmd 查看控制台输出。"
+            "notos-mkr 启动失败：Qt 初始化失败。\n"
+            f"{e!r}\n\n日志: {os.path.join(app_dir, 'notos-mkr.log')}\n"
+            "请查看日志排查。"
         )
         return 1
-    qapp.setApplicationName("mkr")
-    qapp.setOrganizationName("mkr")
-    qapp.setApplicationDisplayName("mkr")
+    qapp.setApplicationName("notos-mkr")
+    qapp.setOrganizationName("notos-mkr")
+    qapp.setApplicationDisplayName("notos-mkr")
     qapp.setQuitOnLastWindowClosed(True)
 
     try:
@@ -163,11 +163,11 @@ def run_gui() -> int:
 
     kind, lock, mutex_handle = _acquire_single_instance(app_dir, log)
     if kind == "denied":
-        log.warning("another mkr instance is already running")
+        log.warning("another notos-mkr instance is already running")
         _fatal_message(
-            "mkr 已经在运行。\n\n"
-            "如果看不到胶囊，请检查屏幕边缘，或先在任务管理器结束旧的 mkr/pythonw 进程。\n"
-            f"日志: {os.path.join(app_dir, 'mkr.log')}"
+            "notos-mkr 已经在运行。\n\n"
+            "如果看不到胶囊，请检查屏幕边缘，或先在任务管理器结束旧的 notos-mkr/pythonw 进程。\n"
+            f"日志: {os.path.join(app_dir, 'notos-mkr.log')}"
         )
         return 0
 
@@ -177,8 +177,8 @@ def run_gui() -> int:
         except Exception as e:
             log.exception("missing runtime dependency")
             _fatal_message(
-                f"mkr 启动失败：缺少运行依赖。\n{e!r}\n\n"
-                f"日志: {os.path.join(app_dir, 'mkr.log')}\n"
+                f"notos-mkr 启动失败：缺少运行依赖。\n{e!r}\n\n"
+                f"日志: {os.path.join(app_dir, 'notos-mkr.log')}\n"
                 "请先运行: .venv\\Scripts\\pip install -e ."
             )
             return 1
@@ -206,9 +206,9 @@ def run_gui() -> int:
         except Exception as e:
             log.exception("gui crashed")
             _fatal_message(
-                "mkr 启动失败。\n"
-                f"{e!r}\n\n日志: {os.path.join(app_dir, 'mkr.log')}\n"
-                "请使用 run_gui_debug.cmd 查看完整 traceback。"
+                "notos-mkr 启动失败。\n"
+                f"{e!r}\n\n日志: {os.path.join(app_dir, 'notos-mkr.log')}\n"
+                "请查看日志排查。"
             )
             return 1
         finally:

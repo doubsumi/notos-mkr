@@ -3,15 +3,15 @@
 Agent 配置示例（在 Claude Desktop / Cursor / Cline 等里）::
 
     "mcpServers": {
-      "mkr": {
-        "command": "mkr-mcp",
+      "notos-mkr": {
+        "command": "notos-mkr-mcp",
         "args": []
       }
     }
 
 直接运行（stdio 模式）::
 
-    mkr-mcp
+    notos-mkr-mcp
 """
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ from .app import App
 from .recorder import Replayer, release_modifiers
 from . import storage
 
-mcp = FastMCP("mkr")
+mcp = FastMCP("notos-mkr")
 
 # 单例 App / Replayer，MCP 工具共享同一实例
 _app: App | None = None

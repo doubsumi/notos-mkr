@@ -5,13 +5,13 @@ cd /d "%~dp0"
 
 set "PYW=%~dp0.venv\Scripts\pythonw.exe"
 if exist "%PYW%" (
-    start "" "%PYW%" -m mkr.gui
+    start "" "%PYW%" -m notos_mkr.gui
     exit /b 0
 )
 
 where pythonw >nul 2>nul
 if not errorlevel 1 (
-    start "" pythonw -m mkr.gui
+    start "" pythonw -m notos_mkr.gui
     exit /b 0
 )
 

@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mkr"
+name = "notos-mkr"
 version = "0.1.0"
 description = "Lightweight mouse & keyboard recorder / replayer with a capsule GUI and MCP server"
 readme = "README.md"
@@ -15,16 +15,16 @@ dependencies = [
 ]
 
 [project.scripts]
-mkr = "mkr.cli:main"
-mkr-mcp = "mkr.mcp_server:main"
+notos-mkr = "notos_mkr.cli:main"
+notos-mkr-mcp = "notos_mkr.mcp_server:main"
 
 [project.gui-scripts]
-mkr-gui = "mkr.gui:run_gui"
+notos-mkr-gui = "notos_mkr.gui:run_gui"
 
 [project.urls]
-Homepage = "https://github.com/doubsumi/mkr"
-Repository = "https://github.com/doubsumi/mkr"
-Issues = "https://github.com/doubsumi/mkr/issues"
+Homepage = "https://github.com/doubsumi/notos-mkr"
+Repository = "https://github.com/doubsumi/notos-mkr"
+Issues = "https://github.com/doubsumi/notos-mkr/issues"
 
 [tool.setuptools.packages.find]
-include = ["mkr*"]
+include = ["notos_mkr*"]

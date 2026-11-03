@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="mkr">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="notos-mkr">
   <defs>
-    <linearGradient id="mkrBgIcon" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+    <linearGradient id="notosMkrBgIcon" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#EDEDED"/>
       <stop offset="1" stop-color="#FFFFFF"/>
     </linearGradient>
-    <linearGradient id="mkrMonoIcon" x1="22" y1="22" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+    <linearGradient id="notosMkrMonoIcon" x1="22" y1="22" x2="42" y2="42" gradientUnits="userSpaceOnUse">
       <stop offset="0"    stop-color="#E8E8E8"/>
       <stop offset="0.06" stop-color="#C8C8C8"/>
       <stop offset="0.50" stop-color="#9A9A9A"/>
@@ -14,11 +14,11 @@
     </linearGradient>
   </defs>
 
-  <rect width="64" height="64" rx="16" fill="url(#mkrBgIcon)"/>
+  <rect width="64" height="64" rx="16" fill="url(#notosMkrBgIcon)"/>
   <rect x="0.5" y="0.5" width="63" height="63" rx="15.5"
         fill="none" stroke="#E0E0E0" stroke-width="1"/>
 
   <circle cx="32" cy="32" r="14" fill="none"
-          stroke="url(#mkrMonoIcon)" stroke-width="2.5"/>
-  <circle cx="32" cy="32" r="7" fill="url(#mkrMonoIcon)"/>
+          stroke="url(#notosMkrMonoIcon)" stroke-width="2.5"/>
+  <circle cx="32" cy="32" r="7" fill="url(#notosMkrMonoIcon)"/>
 </svg>

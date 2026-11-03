@@ -19,7 +19,7 @@ import time
 
 from pynput import keyboard
 
-log = logging.getLogger("mkr.keyboard")
+log = logging.getLogger("notos-mkr.keyboard")
 
 _IS_WINDOWS = sys.platform == "win32"
 
@@ -113,7 +113,7 @@ class PollingKeyboardService:
             if self._thread is None:
                 self._thread = threading.Thread(
                     target=self._run,
-                    name="mkr-keyboard-poll",
+                    name="notos-mkr-keyboard-poll",
                     daemon=True,
                 )
                 self._thread.start()

@@ -19,8 +19,8 @@ from pynput import keyboard, mouse
 from .recorder import Recorder, Replayer, release_modifiers
 
 
-log = logging.getLogger("mkr.app")
-_DEBUG_INPUT = os.environ.get("MKR_DEBUG_INPUT") == "1"
+log = logging.getLogger("notos-mkr.app")
+_DEBUG_INPUT = os.environ.get("NOTOS_MKR_DEBUG_INPUT") == "1"
 
 
 if wintypes is not None:
@@ -150,7 +150,7 @@ class _TripleCtrlDetector:
             try:
                 self._cb()
             except Exception as e:
-                print(f"[mkr] triple-ctrl callback error: {e}")
+                print(f"[notos-mkr] triple-ctrl callback error: {e}")
 
     def on_release(self, key, injected: bool = False) -> None:
         if injected:
@@ -250,7 +250,7 @@ class App:
             try:
                 cb(name, **payload)
             except Exception as e:
-                print(f"[mkr] listener error: {e}")
+                print(f"[notos-mkr] listener error: {e}")
 
     @property
     def is_recording(self) -> bool:
@@ -292,7 +292,7 @@ class App:
                 log.warning("keyboard polling service unavailable")
         except Exception as e:
             log.exception("keyboard polling subscribe failed")
-            print(f"[mkr] keyboard polling unavailable: {e}")
+            print(f"[notos-mkr] keyboard polling unavailable: {e}")
 
     def _on_polled_press(self, key) -> None:
         if self._shutdown:
@@ -305,7 +305,7 @@ class App:
                 self._triple_ctrl.on_press(key)
                 self._poll_hotkeys.on_press(key)
         except Exception as e:
-            print(f"[mkr] polled key press error: {e}")
+            print(f"[notos-mkr] polled key press error: {e}")
 
     def _on_polled_release(self, key) -> None:
         if self._shutdown:
@@ -317,7 +317,7 @@ class App:
                 self._triple_ctrl.on_release(key)
                 self._poll_hotkeys.on_release(key)
         except Exception as e:
-            print(f"[mkr] polled key release error: {e}")
+            print(f"[notos-mkr] polled key release error: {e}")
 
     def _on_polled_repeat(self, key) -> None:
         """按住键的自动重复：只回灌给录制器，不触发热键/接管。"""
@@ -326,7 +326,7 @@ class App:
         try:
             self.recorder.on_press(key)
         except Exception as e:
-            print(f"[mkr] polled key repeat error: {e}")
+            print(f"[notos-mkr] polled key repeat error: {e}")
 
     def start_hotkeys(self) -> None:
         self._hotkeys_enabled = True
@@ -399,7 +399,7 @@ class App:
 
         self.recorder.ignore_point = self.recording_filter
 
-        # 诊断：记录前台目标是否 Elevated。普通权限的 mkr 在 Elevated
+        # 诊断：记录前台目标是否 Elevated。普通权限的 notos-mkr 在 Elevated
         # 前台窗口上会被 UIPI 阻止捕获/注入键鼠。
         try:
             fg_pid, fg_elevated = _foreground_process_info()
@@ -411,7 +411,7 @@ class App:
             if fg_elevated and not _current_process_elevated():
                 log.warning(
                     "前台窗口属于 Elevated 进程；Windows UIPI 会阻止普通权限 "
-                    "mkr 捕获/注入键鼠，请用 run_gui_admin.cmd 以管理员身份启动。"
+                    "notos-mkr 捕获/注入键鼠，请用 run_gui_admin.cmd 以管理员身份启动。"
                 )
         except Exception:
             pass
@@ -511,7 +511,7 @@ class App:
                 on_event=self._on_replay_event,
             )
         except Exception as e:
-            print(f"[mkr] replay start error: {e}")
+            print(f"[notos-mkr] replay start error: {e}")
             self._emit("play_finished")
             return False
         if not ok:

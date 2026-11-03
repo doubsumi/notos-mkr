@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="assets/ico.svg" width="96" height="96" alt="mkr">
+  <img src="assets/ico.svg" width="96" height="96" alt="notos-mkr">
 
-  # mkr
+  # notos-mkr
 
   **轻量、跨平台的鼠标键盘录制与回放工具**
 
@@ -43,16 +43,16 @@
 
 ### 下载预编译版本
 
-前往 [Releases](https://github.com/doubsumi/mkr/releases/latest) 下载 Windows 绿色版
-`mkr-0.1.0-windows-x64.zip`，解压后双击 `mkr.exe` 即可运行，无需安装 Python。
+前往 [Releases](https://github.com/doubsumi/notos-mkr/releases/latest) 下载 Windows 绿色版
+`notos-mkr-0.1.0-windows-x64.zip`，解压后双击 `notos-mkr.exe` 即可运行，无需安装 Python。
 
 > 未签名 exe 可能触发 SmartScreen 提示，选择「仍要运行」即可。详见 [注意事项](#-注意事项)。
 
 ### 从源码运行
 
 ```bash
-git clone https://github.com/doubsumi/mkr.git
-cd mkr
+git clone https://github.com/doubsumi/notos-mkr.git
+cd notos-mkr
 python -m venv .venv
 .venv\Scripts\pip install -e .      # Windows
 # source .venv/bin/activate && pip install -e .   # Linux / macOS
@@ -65,8 +65,8 @@ python -m venv .venv
 ### 悬浮胶囊 GUI
 
 ```bash
-mkr          # 不带参数默认启动 GUI
-mkr gui      # 显式启动 GUI
+notos-mkr          # 不带参数默认启动 GUI
+notos-mkr gui      # 显式启动 GUI
 ```
 
 Windows 下也可直接使用仓库内的启动脚本，免去激活虚拟环境：
@@ -91,9 +91,9 @@ Windows 下也可直接使用仓库内的启动脚本，免去激活虚拟环境
 ### 命令行
 
 ```bash
-mkr record -o demo.json          # 热键录制并保存为 JSON
-mkr replay demo.json             # 回放（--speed 2.0 --loops 3 --no-countdown）
-mkr-mcp                          # 启动 MCP stdio server
+notos-mkr record -o demo.json          # 热键录制并保存为 JSON
+notos-mkr replay demo.json             # 回放（--speed 2.0 --loops 3 --no-countdown）
+notos-mkr-mcp                          # 启动 MCP stdio server
 ```
 
 ### 录制文件格式
@@ -108,7 +108,7 @@ JSON，包含版本号、创建时间、总时长与事件序列；事件类型�
 ```json
 {
   "mcpServers": {
-    "mkr": { "command": "mkr-mcp", "args": [] }
+    "notos-mkr": { "command": "notos-mkr-mcp", "args": [] }
   }
 }
 ```
@@ -118,9 +118,9 @@ JSON，包含版本号、创建时间、总时长与事件序列；事件类型�
 ## 🏗️ 项目结构
 
 ```
-mkr/
+notos-mkr/
 ├── entry.py                  # PyInstaller 入口（含 DPI 声明）
-├── mkr/
+├── notos_mkr/
 │   ├── recorder.py           # 录制 / 回放核心引擎
 │   ├── app.py                # 应用层：热键、事件总线、生命周期
 │   ├── keyboard_polling.py   # Windows 键盘轮询后端
@@ -147,8 +147,8 @@ mkr/
 ```powershell
 .venv\Scripts\pip install pyinstaller
 .venv\Scripts\python -m PyInstaller --noconfirm --clean --windowed --onedir ^
-  --name mkr --icon assets\ico.ico --version-file version_info.txt ^
-  --collect-all mkr --collect-submodules pynput ^
+  --name notos-mkr --icon assets\ico.ico --version-file version_info.txt ^
+  --collect-all notos_mkr --collect-submodules pynput ^
   --hidden-import PySide6.QtCore --hidden-import PySide6.QtGui ^
   --hidden-import PySide6.QtWidgets ^
   --exclude-module PySide6.QtWebEngineCore ^
@@ -160,14 +160,14 @@ mkr/
   entry.py
 ```
 
-产物位于 `dist/mkr/`，压缩为 zip 即为绿色分发包；也可直接运行 `build_exe.cmd`。
+产物位于 `dist/notos-mkr/`，压缩为 zip 即为绿色分发包；也可直接运行 `build_exe.cmd`。
 
 ### Linux
 
 ```bash
-pyinstaller --noconsole --clean --onedir --name mkr --collect-all mkr \
+pyinstaller --noconsole --clean --onedir --name notos-mkr --collect-all notos_mkr \
   --collect-submodules pynput --noupx entry.py
-tar -czf mkr-linux-x64.tar.gz -C dist mkr
+tar -czf notos-mkr-linux-x64.tar.gz -C dist notos-mkr
 ```
 
 ## ⚠️ 注意事项
@@ -176,7 +176,7 @@ tar -czf mkr-linux-x64.tar.gz -C dist mkr
   对外分发建议进行代码签名（OV / EV / Azure Trusted Signing）。
 - **管理员目标应用**：Windows UIPI 会阻止普通权限进程注入键鼠；录制/回放 Elevated
   窗口时，请通过 `run_gui_admin.cmd` 或管理员终端启动。
-- **录制无输入事件**：确认目标窗口未被保护，且 mkr 与目标应用处于同一交互桌面。
+- **录制无输入事件**：确认目标窗口未被保护，且 notos-mkr 与目标应用处于同一交互桌面。
 - **Linux + Wayland**：pynput 依赖 X11，纯 Wayland 会话下不可用，请切换至 X11 或启用 XWayland。
 - **macOS**：首次运行需在「系统设置 → 隐私与安全性 → 辅助功能」中授权终端 / 解释器。
 
@@ -187,5 +187,5 @@ tar -czf mkr-linux-x64.tar.gz -C dist mkr
 ---
 
 <div align="center">
-  <sub>mkr —— 让重复操作只需演示一次。</sub>
+  <sub>notos-mkr —— 让重复操作只需演示一次。</sub>
 </div>

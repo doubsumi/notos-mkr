@@ -8,14 +8,14 @@ if (-not (Test-Path -LiteralPath $pythonw)) {
     exit 1
 }
 $desktop = [Environment]::GetFolderPath('Desktop')
-$shortcutPath = Join-Path $desktop 'mkr.lnk'
+$shortcutPath = Join-Path $desktop 'notos-mkr.lnk'
 $shell = New-Object -ComObject WScript.Shell
 $sc = $shell.CreateShortcut($shortcutPath)
 $sc.TargetPath = $pythonw
-$sc.Arguments = '-m mkr.gui'
+$sc.Arguments = '-m notos_mkr.gui'
 $sc.WorkingDirectory = $root
 $sc.WindowStyle = 7
-$sc.Description = 'mkr 胶囊录制回放'
+$sc.Description = 'notos-mkr 胶囊录制回放'
 $icon = Join-Path $root 'assets\ico.ico'
 if (Test-Path -LiteralPath $icon) {
     $sc.IconLocation = $icon
